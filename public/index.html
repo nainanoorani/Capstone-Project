@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Hang Man</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="/styles"> -->
+    <link rel="stylesheet" href="./index.css"> 
+</head>
+<body>
+    <h1 id="title">Super Hang Man</h1>
+   
+    <p>Click the New Game button to generate a superhero guess word</p>
+    <p>Guess a letter at a time until you complete the word without making a hangman!</p>
+
+    <button id="newGame">New Game</button>
+    <div id="score"></div>
+
+        <hr/>
+        <!-- Replace with commented Wins Losses h2 tags-->
+        <h2 id="wins">Wins:</h2>
+        <h2 id="losses">Losses:</h2>
+        <!-- <h2 id="wins"></h2>
+        <h2 id="losses"></h2> -->
+
+    <hr/>
+    <div id="hang-man"></div>
+        
+        <!-- <h2 id="empty">Hangman</h2>
+        <img src="https://www.wolframcloud.com/files/ff550c1c-289a-4380-8ec0-68b24a363342/htmlcaches/images/7f958d709c061a11ced8700b8fee3f714367b7276f1834d7b65c9ebf7fb41ff7"> -->
+         <!-- Appears when wrong guess -->
+        <img id=hangman-img src='/images/hangman_superhero.png' alt='hangman-superhero'/> 
+        <!-- Replace with random generated -->
+        <h2 id="dashes">_ _ _</h2>
+    <hr/>
+
+
+    <input type = "letter">
+    <button id="enter">Enter Letter</button>
+
+   
+
+    <h2 id="results"></h2>
+    <button id="play-again">Play again!</button>
+
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- <script src="/js"></script> -->
+    <script src="./index.js"></script>
+</body>
+</html>
