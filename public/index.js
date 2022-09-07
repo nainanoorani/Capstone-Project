@@ -5,46 +5,48 @@ const scoreDiv = document.querySelector('#score')
 
 const resultsText = document.querySelector('#results')
 const playAgainBtn = document.querySelector('#play-again')
-const winsText = document.querySelector('#wins')
-const lossesTest = document.querySelector('#losses')
+const wrongText = document.querySelector('#wrong')
+
+
+
 
 
 let choices = []
 // let compDuo = []
 // let playerDuo = []
 
-playAgainBtn.classList.add('hide')
-
-//makeRobotChoiceCard
+//call these if you guess incorrectly
 const makeHead = () => {
     return `
-        <div class="bot-card outline">
-        <img src='./images/hangman_head' alt='hangman-head'/>
+        <div id="hang-man">
+        <img src='/images/hangman_head.png' alt='hangman-head'/>
+    `
+}
+const makeBody = () => {
+    return `
+        <div id="hang-man">
+        <img src='/images/hangman_body.png' alt='hangman-body'/>
     `
 }
 
-const makeRobotPlayerCard = (bot) => {
+const makeArms = () => {
     return `
-        <div class="bot-card outline">
-        <img src='${bot.imgAddress}' alt='${bot.name}'/>
-        <h3>${bot.name}</h3>
-        <h4>Health: ${bot.health}</h4>
-        <p>Attack 1: ${bot.attacks[0].damage} damage</p>
-        <p>Attack 2: ${bot.attacks[1].damage} damage</p>
-        <button class="bot-btn" onclick="putBotBack(${bot.id})">Remove from Duo</button>
-        </div>
+        <div id="hang-man">
+        <img src='/images/hangman_arms.png' alt='hangman-arms'/>
     `
 }
 
-const makeRobotDisplayCard = (bot) => {
+const makeLegs = () => {
     return `
-        <div class="bot-card outline">
-        <img src='${bot.imgAddress}' alt='${bot.name}'/>
-        <h3>${bot.name}</h3>
-        <h4>Health: ${bot.health}</h4>
-        <p>Attack 1: ${bot.attacks[0].damage} damage</p>
-        <p>Attack 2: ${bot.attacks[1].damage} damage</p>
-        </div>
+        <div id="hang-man">
+        <img src='/images/hangman_legs.png' alt='hangman-legs'/>
+    `
+}
+
+const makeSuperHero = () => {
+    return `
+        <div id="hang-man">
+        <img src='/images/hangman_superhero.png' alt='hangman-superhero'/>
     `
 }
 
@@ -58,109 +60,11 @@ const renderChoices = () => {
     })
 }
 
-const renderCompDuo = () => {
-    compDuoDiv.innerHTML = ''
-    compDuoHeader.classList.remove('hide')
-
-    compDuo.forEach(bot => {
-        let botHtml = makeRobotDisplayCard(bot)
-        compDuoDiv.innerHTML += botHtml
-    })
-}
-
-const renderPlayerDuo = () => {
-    playerDuoDiv.innerHTML = ''
-    yourDuoHeader.classList.remove('hide')
-
-    playerDuo.forEach(bot => {
-        let botHtml = makeRobotPlayerCard(bot)
-        playerDuoDiv.innerHTML += botHtml
-    })
-}
-
-const chooseBot = (id) => {
-    if (playerDuo.length === 2) {
-        return alert('You can only choose two bots!')
-    }
-    let index = choices.findIndex(bot => bot.id === id)
-    playerDuo.push(choices[index])
-    choices.splice(index, 1)
-    renderChoices()
-    renderPlayerDuo()
-    if (playerDuo.length === 2) {
-        duelBtn.classList.remove('hide')
-    }
-}
-
-const putBotBack = (id) => {
-    let index = playerDuo.findIndex(bot => bot.id === id)
-    choices.push(playerDuo[index])
-    playerDuo.splice(index, 1)
-    renderChoices()
-    renderPlayerDuo()
-    duelBtn.classList.add('hide')
-    if (playerDuo.length === 0) {
-        yourDuoHeader.classList.add('hide')
-    }
-}
-
-const drawFive = () => {
-    axios.get('/api/robots/five')
-        .then(res => {
-            choices = res.data.choices
-            compDuo = res.data.compDuo
-            renderChoices()
-            drawBtn.classList.add('hide')
-        })
-}
-
-const duel = () => {
-    resultsText.textContent = 'Dueling...'
-    duelBtn.classList.add('hide')
-    choicesDiv.innerHTML = ''
-    chooseHeader.classList.add('hide')
-    renderCompDuo()
-    document.querySelectorAll('.bot-btn').forEach(btn => btn.classList.add('hide'))
-    setTimeout(() => {
-        axios.post('/api/duel', {compDuo, playerDuo})
-            .then(({data}) => {
-                resultsText.textContent = data
-                playAgainBtn.classList.remove('hide')
-                getPlayerStats()
-            })
-    }, 1500)
-}
-
-const reset = () => {
-    resultsText.textContent = ''
-    choices = []
-    compDuo = []
-    playerDuo = []
-    playAgainBtn.classList.add('hide')
-    renderChoices()
-    renderCompDuo()
-    renderPlayerDuo()
-    drawBtn.classList.remove('hide')
-    compDuoHeader.classList.add('hide')
-}
-
 const getPlayerStats = () => {
     axios.get('/api/player')
-        .then(({data: {wins, losses}}) => {
-            winsText.textContent = `Wins: ${wins}`
-            lossesTest.textContent = `Losses: ${losses}`
-        })
-}
-
-const getAllBots = () => {
-    axios.get('/api/robots')
-        .then(({data}) => {
-            allBotsDiv.innerHTML = ''
-        
-            data.forEach(bot => {
-                let botHtml = makeRobotDisplayCard(bot)
-                allBotsDiv.innerHTML += botHtml
-            })
+        .then(({data: {wrong}}) => {
+            wrongText.textContent = `Wrong: ${wrong}`
+          
         })
 }
 

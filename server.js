@@ -1,93 +1,77 @@
 const express = require('express')
 const path = require('path')
 const app = express()
-const {bots, playerRecord} = require('./data')
-const {shuffleArray} = require('./utils')
+const {superHeroWords} = require('./data')
+const {selectWord} = require('./controller')
 
 app.use(express.json())
-
-var Rollbar = require('rollbar')
-var rollbar = new Rollbar({
-  accessToken: 'b44b511f11d4489686d8a135a6a098a7',
-  captureUncaught: true,
-  captureUnhandledRejections: true,
-})
-
-// record a generic message and send it to Rollbar
-rollbar.log('Hello world!')
 
 //Part 1 
 //add this line to make heroku connect to public folder
 app.use(express.static(path.join(__dirname, '/public')));
 
+//Select Word
+let word = selectWord(superHeroWords);
 
-app.get('/api/robots', (req, res) => {
+//Send blank letters to front end
+app.get('/api/wordBlanks', (req, res) => {
     try {
-        rollbar.info("Served up the robots")
-        res.status(200).send(bots)
+        let underscores='';
+        for(i=0; i<word.length; i++){
+        underscores+= '_ ';}
+       
+        res.status(200).send({underscores})
     } catch (error) {
-        console.log('ERROR GETTING BOTS', error)
-        rollbar.error('Error getting bots') 
+        console.log('ERROR SELECTING SUPER HERO WORD', error)
         res.sendStatus(400)
     }
 })
 
-
-app.get('/api/robots/five', (req, res) => {
+//Request User Input Letter Respond with Index of Letter
+app.get('/api/guessLetter', (req, res) => {
     try {
-        let shuffled = shuffleArray(bots)
-        let choices = shuffled.slice(0, 5)
-        let compDuo = shuffled.slice(6, 8)
-        rollbar.info("Served up 5 random bots")
-        res.status(200).send({choices, compDuo})
+        let {letter} = req.body;
+        //check if the word includes user input letter and return the letter and index
+        if(word.includes(letter)){
+            let index = word.indexOf(letter);
+            return index
+        } else {
+        }
+        res.status(200).send(letter, index)
     } catch (error) {
-        console.log('ERROR GETTING FIVE BOTS', error)
-        rollbar.error('Error getting 5 bots.') 
+        console.log('ERROR IN GUESS LETTER ', error)
+        
         res.sendStatus(400)
     }
 })
 
-app.post('/api/duel', (req, res) => {
-    try {
-        // getting the duos from the front end
-        let {compDuo, playerDuo} = req.body
+//Add Word to superHeroWords
 
-        // adding up the computer player's total health and attack damage
-        let compHealth = compDuo[0].health + compDuo[1].health
-        let compAttack = compDuo[0].attacks[0].damage + compDuo[0].attacks[1].damage + compDuo[1].attacks[0].damage + compDuo[1].attacks[1].damage
-        
-        // adding up the player's total health and attack damage
-        let playerHealth = playerDuo[0].health + playerDuo[1].health
-        let playerAttack = playerDuo[0].attacks[0].damage + playerDuo[0].attacks[1].damage + playerDuo[1].attacks[0].damage + playerDuo[1].attacks[1].damage
-        
-        // calculating how much health is left after the attacks on each other
-        let compHealthAfterAttack = compHealth - playerAttack
-        let playerHealthAfterAttack = playerHealth - compAttack
+app.post('/api/addWord', (req, res) => {
+    try {
+        // getting the new word from front end
+        let {newWord} = req.body;
 
         // comparing the total health to determine a winner
-        if (compHealthAfterAttack > playerHealthAfterAttack) {
-            playerRecord.losses++
-            rollbar.info("User lost. Updating message and record to show loss.")
-            res.status(200).send('You lost!')
+        if (superHeroWords.includes(newWord)) {
+            res.status(200).send('Word is already in our database.')
+            
         } else {
-            playerRecord.losses++
-            rollbar.info("User won. Updating message and record to show win.")
-            res.status(200).send('You won!')
+            superHeroWords.push(newWord);
+       
+            res.status(200).send('Word Added')
         }
     } catch (error) {
-        console.log('ERROR DUELING', error)
-        rollbar.error('Error dueling.') 
+        console.log('ERROR ADDING WORD TO DATABASE', error)
         res.sendStatus(400)
     }
 })
 
 app.get('/api/player', (req, res) => {
     try {
-        rollbar.info("Sent player stats.")
         res.status(200).send(playerRecord)
     } catch (error) {
         console.log('ERROR GETTING PLAYER STATS', error)
-        rollbar.error('Error getting player stats.') 
         res.sendStatus(400)
     }
 })

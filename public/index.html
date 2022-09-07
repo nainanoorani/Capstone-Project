@@ -22,8 +22,8 @@
 
         <hr/>
         <!-- Replace with commented Wins Losses h2 tags-->
-        <h2 id="wins">Wins:</h2>
-        <h2 id="losses">Losses:</h2>
+        <h2 id="wrong">Wrong Guesses:</h2>
+        <h2 id="max">Max Wrong: 6</h2>
         <!-- <h2 id="wins"></h2>
         <h2 id="losses"></h2> -->
 
@@ -34,13 +34,23 @@
         <img src="https://www.wolframcloud.com/files/ff550c1c-289a-4380-8ec0-68b24a363342/htmlcaches/images/7f958d709c061a11ced8700b8fee3f714367b7276f1834d7b65c9ebf7fb41ff7"> -->
          <!-- Appears when wrong guess -->
         <img id=hangman-img src='/images/hangman_superhero.png' alt='hangman-superhero'/> 
+    <div id="guessWord">
         <!-- Replace with random generated -->
-        <h2 id="dashes">_ _ _</h2>
+    
+    </div>
+    <div id="guessWord">
+        <!-- Replace with random generated -->
+        {guessWord}
     <hr/>
+    </div>
+    <div>
+        <button> A </button>
+    </div>
 
 
-    <input type = "letter">
-    <button id="enter">Enter Letter</button>
+
+    <!-- <input type = "letter">
+    <button id="enter">Enter Letter</button> -->
 
    
 
