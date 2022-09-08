@@ -1257,8 +1257,8 @@ const superHeroWords = [
 
 
 const playerRecord = {
-    wins: 0, 
-    losses: 0
+    wrong: 0,
+    gameOver: false
 }
 
 module.exports = {superHeroWords}

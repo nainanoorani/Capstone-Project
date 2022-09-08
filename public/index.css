@@ -79,6 +79,8 @@ button {
     font-size: 18px;
 }
 
+
+
 button:hover {
     background-color: #F6921E;
 }
@@ -89,8 +91,7 @@ button:hover {
 
 #hangman-img {
     display: block;
-    margin-left: 270px;
-    
-    width:45%;
+    margin-left: 160px;
+    width:80%;
 
 }
