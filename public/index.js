@@ -5,7 +5,9 @@ const guessLetter = document.querySelector('#letter')
 const guessLetterForm = document.querySelector('#letterForm')
 const userWord =document.querySelector('#user-word');
 const userWordForm =document.querySelector('#userWordForm');
-const playAgainBtn = document.querySelector('#play-again')
+const numWrong =document.querySelector('#wrongLetter');
+const outcome = document.querySelector('#outcome')
+
 const resultsText = document.querySelector('#results')
 
 let correctGuesses = [];
@@ -17,6 +19,10 @@ let incompleteWord = [];
 
 // When they click new game, get random word and display blanks. Returns word and underscores.
 const newGame = () => {
+    wrongScore = 0;
+    hangmanPic();
+    guessLetterForm.reset();
+    userWordForm.reset();
     axios.get("http://localhost:3000/api/selectWord/")
         .then(res => {
             newWord = res.data.toLowerCase().split('');
@@ -24,17 +30,18 @@ const newGame = () => {
             
             let underscores='';
             for(i=0; i<newWord.length; i++){
-            underscores+= '_ ';
+            underscores+= '_';
             }
-            console.log(underscores);
-            incompleteWord=underscores;
-            
-            // const p = document.createElement('p');
-            // resultsText.appendChild(underscores)
+            incompleteWord=underscores.split('');
+            console.log(incompleteWord);
+            // var text =document.createTextNode(underscores)
+            // resultsText.appendChild(text);
+            resultsText.textContent=underscores;
     })
+    
 }
 
-//working
+//working. add user word to database
 const addToDatabase = (evt) => {
     evt.preventDefault();
     let body ={newWord: userWord.value};
@@ -72,19 +79,24 @@ const hangmanPic = () => {
          hangmanImg.src='/images/hangman_legs.png' 
         }
     else if (wrongScore ==5){
-            //make face NOT WORKING
-            hangmanImg.src=='/images/hangman_face.png';
+            //make face 
+            hangmanImg.src='/images/hangman_face.png';
         }
     else {
             //make superman
             hangmanImg.src='/images/hangman_superhero.png';
-            console.log('Game over, you lost!')
+            outcome.textContent ='Game over, you lost!';
             //how can i clear the image when there is a new guess
 }
 }
+//function to check if split string arrays are equal
+const equals = (a, b) =>
+  a.length === b.length &&
+  a.every((v, i) => v === b[i]);
 
 const processGuess = (evt) => {
     evt.preventDefault();
+    outcome.textContent='';
     let guess = guessLetter.value.toLowerCase();
     let indeces = [];
     if(newWord.includes(guess)){
@@ -96,13 +108,20 @@ const processGuess = (evt) => {
         }
         }
         console.log(indeces);
+        resultsText.textContent=incompleteWord.join('');
+        console.log(incompleteWord);
     } else{
         wrongScore++;
         console.log(wrongScore);
+        outcome.textContent='Letter Not In Word';
         hangmanPic();
-        console.log('Letter Not In Word')
     }
+    if(equals(newWord, incompleteWord)){
+        outcome.textContent="Congrats you won!";
+    }
+    guessLetterForm.reset();
 }
+
 
 
 //Correct Choices
@@ -120,7 +139,7 @@ newGameBtn.addEventListener('click',newGame)
 userWordForm.addEventListener('submit',addToDatabase)
 guessLetterForm.addEventListener('submit', processGuess)
 
-// playAgainBtn.addEventListener('click', reset)
+
 
 
 // getPlayerStats()

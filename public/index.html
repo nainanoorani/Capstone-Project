@@ -18,41 +18,28 @@
     <p>Guess a letter at a time until you complete the word without making a hangman!</p>
 
     <button id="newGame">New Game</button>
-    <!-- <div id="score">
-
+    <div id="score">
         <hr/>
-        
-        <h2 id="wrong">Wrong Guesses:</h2>
+        <h2 id="wrongLetter">Wrong Guesses:</h2>
         <h2 id="max">Max Wrong: 6</h2>
+        <p id="outcome"></p>
     
-    </div> -->
-
+    </div>
     <hr/>
     <div>
-        
-        <!-- <h2 id="empty">Hangman</h2>
-        <img src="/images/hangman_superhero.png> -->
-         <!-- Appears when wrong guess -->
         <img id="hangman-img" src='/images/hangman.png' alt='hangman-gallows'/> 
     </div>
     <div id="correctLetters">
-        <!-- Replace with random generated -->
-        <p> </p>
+        <h2 id="results"></h2>
     <hr/>
     </div>
     <div>
     <form id="letterForm">
         <p>Guess a Letter (can include periods or spaces)</p>
-        <input id="letter" placeholder="Your letter here">
+        <input id="letter" placeholder="Your letter here" maxlength="1">
         <button type="submit">Enter </button>
     </form>
-        <!-- <button> A </button> <button> B </button> <button> C </button> <button> D </button> <button> E </button> <button> F </button> <button> G </button> <button> H </button> <button> I </button> <button> J </button> <button> K </button> <button> L </button> <button> M </button> <button> N </button> <button> O </button> <button> P </button> <button> Q </button> <button> R </button> <button> S </button> <button> T </button> <button> U </button> <button> V </button> <button> W </button> <button> X </button> <button> Y </button> <button> Z </button> <button> . </button> <button> space </button>  -->
     </div>
-
-
-
-    <!-- <input type = "letter">
-    <button id="enter">Enter Letter</button> -->
 
    <div>
     <form id="userWordForm">
@@ -61,10 +48,6 @@
         <button type="submit">Enter </button>
     </form>
    </div>
-
-    <h2 id="results"></h2>
-    <button id="play-again">Play again!</button>
-
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- <script src="/js"></script> -->

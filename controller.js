@@ -24,7 +24,7 @@ module.exports = {
         } else {
             superHeroWords.push(newWord);
             console.log(newWord);
-            res.status(200).send('Word Added')
+            res.status(200).send(`${newWord} Added`)
         }
     } 
 }
