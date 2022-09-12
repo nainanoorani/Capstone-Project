@@ -25,7 +25,7 @@ const newGame = () => {
     hangmanPic();
     guessLetterForm.reset();
     userWordForm.reset();
-    axios.get("http://localhost:3000/api/word/")
+    axios.get("/api/word/")
         .then(res => {
             // newWord = res.data.toLowerCase().split('');
             aWord=res.data.name;
@@ -50,7 +50,7 @@ const addToDatabase = (evt) => {
     evt.preventDefault();
     let body ={name: userWord.value};
     console.log(body);
-    axios.post('http://localhost:3000/api/word', body)
+    axios.post('/api/word', body)
         .then(res=> {
             let addedName = res.data[0].name;
             alert(`${addedName} was added successfully`)})
@@ -61,7 +61,7 @@ const deleteFromDatabase = (evt) => {
     evt.preventDefault();
     let body ={name: deleteWord.value};
     console.log(body);
-    axios.delete(`http://localhost:3000/api/word/${body.name}`)
+    axios.delete(`/api/word/${body.name}`)
         .then(res=> {
             alert(`Your word was deleted successfully`)})
     deleteWordForm.reset();

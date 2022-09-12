@@ -15,6 +15,7 @@ app.use(express.json())
 app.post('/seed', seed)
 
 //Part 1 
+
 //add this line to make heroku connect to public folder
 app.use(express.static(path.join(__dirname, '/public')));
 
