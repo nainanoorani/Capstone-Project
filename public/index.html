@@ -8,13 +8,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="/styles"> -->
     <link rel="stylesheet" href="./index.css"> 
 </head>
 <body>
    
     <h1 id="title">Super Hang Man</h1>
-    
+    <nav>
+		<ol>
+	        <ul class="crumb"><a href="./index.html">Home</a></ul><ul class="crumb"><a href="./art.html">Art</a></ul>
+	    </ol>
+	</nav>
+    <hr/>
     <p>Click the New Game button to generate a superhero guess word</p>
     <p>Guess a letter at a time until you complete the word without making a hangman!</p>
 
@@ -22,13 +26,10 @@
     <div id="score">
         <hr/>
         <h3 id="wrongLetter">Wrong Guesses:</h3>
+        <h3 style="color: white;background-color:#26A9E0">Max Wrong: 6 <span style="color: rgb(0, 0, 0);"></span></h3>
         <!-- <h3 id="max">Max Wrong: 6</h3> -->
-        <h3 style="color: white;background-color:#26A9E0">Max Wrong: <span style="color:#ffffff">6</span></h3>
-
         <p id="outcome"></p>
-
     </div>
-    <hr/>
     <div>
         <img id="hangman-img" src='/images/hangman.png' alt='hangman-gallows'/> 
     </div>
@@ -43,7 +44,6 @@
         <button type="submit">Enter </button>
     </form>
     </div>
-
    <div>
     <form id="userWordForm">
         <p>Add Your Own Super Hero Word to our Database</p> 
@@ -51,9 +51,15 @@
         <button type="submit">Enter </button>
     </form>
    </div>
+   <div>
+    <!-- <form id="deleteWordForm">
+        <p>Delete a Word from our Database</p> 
+        <input id=delete-word placeholder="Word to delete">
+        <button type="submit">Enter </button>
+    </form> -->
+   </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <!-- <script src="/js"></script> -->
     <script src="./index.js"></script>
 </body>
 </html>

@@ -97,11 +97,23 @@ hr{
 } */
 #newGame{
      background-image: url(
-            'https://thumbs.dreamstime.com/b/star-sign-7126423.jpg');
-            background-size: cover;
-            width: 125px;
-            height: 125px;
+     'https://thumbs.dreamstime.com/b/star-sign-7126423.jpg');
+    background-size: cover;
+    width: 125px;
+    height: 125px;
 }
+
 #letterForm {
     margin-left: 9%;
+}
+ul {
+    display: inline;
+    padding-left: 50px;
+  }
+
+#stick-fig-art{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:50%;
 }

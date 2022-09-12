@@ -3,11 +3,16 @@ const path = require('path')
 const app = express()
 
 const {
+    seed,
     selectWord,
-    addWord
+    addWord,
+    // deleteWord
 } = require('./controller')
 
 app.use(express.json())
+
+// DEV
+app.post('/seed', seed)
 
 //Part 1 
 //add this line to make heroku connect to public folder
@@ -19,7 +24,10 @@ app.get('/api/selectWord', selectWord)
 //Add Word to superHeroWords.
 app.post('/api/addWord', addWord)
 
-//Should this be a put request?
+//Add Word to superHeroWords.
+// app.delete('/api/deleteWord', deleteWord)
+
+
 // app.get('/api/player', (req, res) => {
 //     try {
 //         res.status(200).send(playerRecord)

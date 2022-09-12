@@ -25,7 +25,9 @@ const newGame = () => {
     userWordForm.reset();
     axios.get("http://localhost:3000/api/selectWord/")
         .then(res => {
-            newWord = res.data.toLowerCase().split('');
+            // newWord = res.data.toLowerCase().split('');
+            aWord=res.data.name;
+            newWord = aWord.toLowerCase().split('');
             console.log(newWord);
             
             let underscores='';
@@ -44,16 +46,14 @@ const newGame = () => {
 //working. add user word to database
 const addToDatabase = (evt) => {
     evt.preventDefault();
-    let body ={newWord: userWord.value};
+    let body ={name: userWord.value};
+    console.log(body);
     axios.post('http://localhost:3000/api/addWord', body)
         .then(res=> {
-            alert(res.data)})
+            let addedName = res.data[0].name;
+            alert(`${addedName} was added successfully`)})
 }
 
-    // choices.forEach(choice => {
-    //     let botHtml = makeRobotChoiceCard(choice)
-    //     choicesDiv.innerHTML += botHtml
-    // })
 
 //how to get this to update
 const hangmanPic = () => {
@@ -116,7 +116,7 @@ const processGuess = (evt) => {
         outcome.textContent='Letter Not In Word';
         hangmanPic();
     }
-    if(equals(newWord, incompleteWord)){
+    if((equals(newWord,incompleteWord))){
         outcome.textContent="Congrats you won!";
     }
     guessLetterForm.reset();
