@@ -106,6 +106,9 @@ hr{
 #letterForm {
     margin-left: 9%;
 }
+#deleteWordForm {
+    margin-right: 100px;
+}
 ul {
     display: inline;
     padding-left: 50px;

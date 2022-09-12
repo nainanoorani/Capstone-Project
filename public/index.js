@@ -5,6 +5,8 @@ const guessLetter = document.querySelector('#letter')
 const guessLetterForm = document.querySelector('#letterForm')
 const userWord =document.querySelector('#user-word');
 const userWordForm =document.querySelector('#userWordForm');
+const deleteWord =document.querySelector('#delete-word');
+const deleteWordForm =document.querySelector('#deleteWordForm');
 const numWrong =document.querySelector('#wrongLetter');
 const outcome = document.querySelector('#outcome')
 
@@ -23,7 +25,7 @@ const newGame = () => {
     hangmanPic();
     guessLetterForm.reset();
     userWordForm.reset();
-    axios.get("http://localhost:3000/api/selectWord/")
+    axios.get("http://localhost:3000/api/word/")
         .then(res => {
             // newWord = res.data.toLowerCase().split('');
             aWord=res.data.name;
@@ -48,10 +50,21 @@ const addToDatabase = (evt) => {
     evt.preventDefault();
     let body ={name: userWord.value};
     console.log(body);
-    axios.post('http://localhost:3000/api/addWord', body)
+    axios.post('http://localhost:3000/api/word', body)
         .then(res=> {
             let addedName = res.data[0].name;
             alert(`${addedName} was added successfully`)})
+    userWordForm.reset();
+}
+
+const deleteFromDatabase = (evt) => {
+    evt.preventDefault();
+    let body ={name: deleteWord.value};
+    console.log(body);
+    axios.delete(`http://localhost:3000/api/word/${body.name}`)
+        .then(res=> {
+            alert(`Your word was deleted successfully`)})
+    deleteWordForm.reset();
 }
 
 
@@ -99,7 +112,13 @@ const processGuess = (evt) => {
     outcome.textContent='';
     let guess = guessLetter.value.toLowerCase();
     let indeces = [];
-    if(newWord.includes(guess)){
+    if((equals(newWord,incompleteWord))){
+        outcome.textContent="Congrats you won!";
+    }
+    else if(wrongScore>=6){
+        outcome.textContent="Game over, you lost!";
+    }
+    else if(newWord.includes(guess)){
         for(let i=0; i<newWord.length; i++){
         if(newWord[i]==guess){
             indeces.push(i);
@@ -112,13 +131,15 @@ const processGuess = (evt) => {
         console.log(incompleteWord);
     } else{
         wrongScore++;
-        console.log(wrongScore);
+        // console.log(wrongScore);
+        numWrong.textContent =`Wrong Guesses: ${wrongScore}`;
         outcome.textContent='Letter Not In Word';
         hangmanPic();
     }
     if((equals(newWord,incompleteWord))){
         outcome.textContent="Congrats you won!";
     }
+    
     guessLetterForm.reset();
 }
 
@@ -136,8 +157,9 @@ const processGuess = (evt) => {
 // }
 
 newGameBtn.addEventListener('click',newGame)
-userWordForm.addEventListener('submit',addToDatabase)
 guessLetterForm.addEventListener('submit', processGuess)
+userWordForm.addEventListener('submit',addToDatabase)
+deleteWordForm.addEventListener('submit',deleteFromDatabase)
 
 
 

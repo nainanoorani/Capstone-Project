@@ -17,6 +17,17 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 const newWord = ['POST request'];
 
 module.exports = {
+
+    // getWord: (req,res) => {
+
+    //     sequelize.query(`
+    //         SELECT name FROM superHeroWords;`
+    //         ).then(dbRes=> {
+    //             res.status(200).send(dbRes[0]);
+    //         }).catch(err => console.log('error getting superHero words', err))
+
+    // },
+
     selectWord: (req,res) => {
     
  
@@ -27,7 +38,7 @@ module.exports = {
             const index = Math.floor(Math.random()*array.length);
             let word = array[index];
             res.status(200).send(word);
-        }).catch(err => console.log('error getting countries', err))
+        }).catch(err => console.log('error getting random super hero word', err))
 
         
 
@@ -53,17 +64,17 @@ module.exports = {
         // }
     },
 
-    // deleteWord: (req,res) => {
-    //     let {id} = req.params;
-    //     sequelize.query(`
-    //     DELETE
-    //     FROM superHeroWords
-    //     WHERE superhero_id = ${id}
-    //     `
-    //     ).then(dbRes=> res.status(200).send(dbRes[0])
-    //     ).catch(err => console.log('error deleting superhero', err))
+    deleteWord: (req,res) => {
+        let {name} = req.params;
+        sequelize.query(`
+        DELETE
+        FROM superHeroWords
+        WHERE name = '${name}'
+        `
+        ).then(dbRes=> res.status(200).send(dbRes[0])
+        ).catch(err => console.log('error deleting superhero', err))
 
-    // },
+    },
 
     seed: (req, res) => {
         sequelize.query(`

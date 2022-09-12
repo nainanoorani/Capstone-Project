@@ -6,7 +6,7 @@ const {
     seed,
     selectWord,
     addWord,
-    // deleteWord
+    deleteWord
 } = require('./controller')
 
 app.use(express.json())
@@ -19,13 +19,13 @@ app.post('/seed', seed)
 app.use(express.static(path.join(__dirname, '/public')));
 
 //Select Word. Axios requests this function. Pass in superherowords
-app.get('/api/selectWord', selectWord)
+app.get('/api/word', selectWord)
 
 //Add Word to superHeroWords.
-app.post('/api/addWord', addWord)
+app.post('/api/word', addWord)
 
 //Add Word to superHeroWords.
-// app.delete('/api/deleteWord', deleteWord)
+app.delete('/api/word/:name', deleteWord)
 
 
 // app.get('/api/player', (req, res) => {
