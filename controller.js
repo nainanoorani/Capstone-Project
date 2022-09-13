@@ -13,20 +13,10 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
 }
 )
 
-// const {superHeroWords} = require('./data')
+
 const newWord = ['POST request'];
 
 module.exports = {
-
-    // getWord: (req,res) => {
-
-    //     sequelize.query(`
-    //         SELECT name FROM superHeroWords;`
-    //         ).then(dbRes=> {
-    //             res.status(200).send(dbRes[0]);
-    //         }).catch(err => console.log('error getting superHero words', err))
-
-    // },
 
     selectWord: (req,res) => {
     
@@ -48,20 +38,11 @@ module.exports = {
     
         // getting the new word from front end
         let {name} = req.body;
-
-        // if (superHeroWords.includes(newWord)) {
-        //     res.status(200).send('Word is already in our database.')
-            
-        // } else {
             
             sequelize.query(`
              INSERT INTO superHeroWords(name) VALUES ('${name}') RETURNING *
              `).then(dbRes => res.status(200).send(dbRes[0]))
              .catch(err => console.log('error creating superhero', err))
-            // superHeroWords.push(newWord);
-            // console.log(newWord);
-            // res.status(200).send(`${newWord} Added`)
-        // }
     },
 
     deleteWord: (req,res) => {
@@ -121,27 +102,3 @@ module.exports = {
     } 
 
 }
-
-
-//Request User Input Letter Respond with Index of Letter. Move to front end. 
-// app.get('/api/guessLetter', (req, res) => {
-//     try {
-//         let {letter} = req.body;
-//         //check if the word includes user input letter and return the letter and index
-//         if(word.includes(letter)){
-//             let index = word.indexOf(letter);
-//             return index
-//         } else {
-//         }
-//         res.status(200).send(letter, index)
-//     } catch (error) {
-//         console.log('ERROR IN GUESS LETTER ', error)
-        
-//         res.sendStatus(400)
-//     }
-// })
-
-
-// module.exports = {
-//     selectWord
-// }

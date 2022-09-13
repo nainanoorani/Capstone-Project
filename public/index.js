@@ -38,8 +38,7 @@ const newGame = () => {
             }
             incompleteWord=underscores.split('');
             console.log(incompleteWord);
-            // var text =document.createTextNode(underscores)
-            // resultsText.appendChild(text);
+            
             resultsText.textContent=underscores;
     })
     
@@ -122,7 +121,7 @@ const processGuess = (evt) => {
         for(let i=0; i<newWord.length; i++){
         if(newWord[i]==guess){
             indeces.push(i);
-            //how to add the letter to that index (replace underscore)
+            //add the letter to that index (replace underscore)
             incompleteWord[i]=guess;
         }
         }
@@ -131,7 +130,6 @@ const processGuess = (evt) => {
         console.log(incompleteWord);
     } else{
         wrongScore++;
-        // console.log(wrongScore);
         numWrong.textContent =`Wrong Guesses: ${wrongScore}`;
         outcome.textContent='Letter Not In Word';
         hangmanPic();
@@ -144,18 +142,6 @@ const processGuess = (evt) => {
 }
 
 
-
-//Correct Choices
-
-
-// const getPlayerStats = () => {
-//     axios.get('/api/player')
-//         .then(({data: {wrong}}) => {
-//             wrongText.textContent = `Wrong: ${wrong}`
-          
-//         })
-// }
-
 newGameBtn.addEventListener('click',newGame)
 guessLetterForm.addEventListener('submit', processGuess)
 userWordForm.addEventListener('submit',addToDatabase)
@@ -164,4 +150,3 @@ deleteWordForm.addEventListener('submit',deleteFromDatabase)
 
 
 
-// getPlayerStats()

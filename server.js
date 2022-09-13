@@ -28,16 +28,6 @@ app.post('/api/word', addWord)
 //Add Word to superHeroWords.
 app.delete('/api/word/:name', deleteWord)
 
-
-// app.get('/api/player', (req, res) => {
-//     try {
-//         res.status(200).send(playerRecord)
-//     } catch (error) {
-//         console.log('ERROR GETTING PLAYER STATS', error)
-//         res.sendStatus(400)
-//     }
-// })
-
 const port = process.env.PORT || 3000
 
 app.listen(port, () => {
