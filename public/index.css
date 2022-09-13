@@ -126,8 +126,17 @@ ul {
 
 #stick-fig-art{
     display: block;
-    margin-top: 200px;
+    margin-top: 70px;
     margin-left: auto;
     margin-right: auto;
-    width:50%;
+    width: 40%;
+}
+
+#art{
+    background-image: url('https://t4.ftcdn.net/jpg/02/76/64/63/360_F_276646305_WDMuciGs0FvknNb3HS0TNm8scLg8Wkps.jpg');
+    background-size: 100vw 100vw;
+    background-position-y: 80px;
+    background-repeat: no-repeat;
+    margin-top:0px;
+    overflow-x:hidden; 
 }
