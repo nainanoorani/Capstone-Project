@@ -88,8 +88,8 @@ input {
     border-color: rgb(37, 163, 231);
     border-width: medium;
     align-items: center;
-    margin-left: 100px;
-    
+    margin-left: 20%;
+  
 }
 
 
@@ -106,12 +106,8 @@ input {
 
 
 
-#letterForm {
-    margin-left: 9%;
-}
-#deleteWordForm {
-    margin-right: 100px;
-}
+
+
 ul {
     display: inline;
     background-color: lightgrey;
