@@ -47,7 +47,7 @@ body {
     width: 100%;
     height:100%;
     background-image: url('https://t4.ftcdn.net/jpg/02/76/64/63/360_F_276646305_WDMuciGs0FvknNb3HS0TNm8scLg8Wkps.jpg');
-   background-size: 100% 27%;
+   background-size: 100% 23.5%;
    background-position-y: 80px;
    background-repeat: no-repeat;
    margin-top:0px;
@@ -66,7 +66,7 @@ button {
 }
 
 
-p,h2{
+p, h2{
     margin-top: 35px;
     background-color: white;
 }
