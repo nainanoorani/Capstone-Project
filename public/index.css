@@ -126,10 +126,10 @@ ul {
 
 #stick-fig-art{
     display: block;
-    margin-top: 70px;
+    margin-top: 20px;
     margin-left: auto;
     margin-right: auto;
-    width: 40%;
+    width: 60%;
 }
 
 #art{
@@ -140,3 +140,14 @@ ul {
     margin-top:0px;
     overflow-x:hidden; 
 }
+
+#stick-fig-text{
+    /* display: block;  */
+    margin-top: 20px;
+    margin-bottom:0px;
+    /* margin-left: auto;
+    margin-right: auto; */
+    width: 60%; 
+    background-color: white;
+}
+
