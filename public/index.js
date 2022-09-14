@@ -19,8 +19,6 @@ let incompleteWord = [];
 
 
 
-
-
 // When they click new game, get random word and display blanks. Returns word and underscores.
 const newGame = () => {
     wrongScore = 0;
@@ -30,7 +28,7 @@ const newGame = () => {
     axios.get("/api/word/")
         .then(res => {
             // newWord = res.data.toLowerCase().split('');
-            let aWord=res.data.name;
+            aWord=res.data.name;
             newWord = aWord.toLowerCase().split('');
             console.log(newWord);
             
@@ -42,7 +40,6 @@ const newGame = () => {
             console.log(incompleteWord);
             
             resultsText.textContent=underscores;
-            return aWord;
     })
     
 }
@@ -72,7 +69,6 @@ const deleteFromDatabase = (evt) => {
 
 //how to get this to update
 const hangmanPic = () => {
-    
     if (wrongScore == 0){
         //gallows
         hangmanImg.src='/images/hangman.png'; 
@@ -101,7 +97,7 @@ const hangmanPic = () => {
     else {
             //make superman
             hangmanImg.src='/images/hangman_superhero.png';
-            // outcome.textContent ='Game over, you lost!';
+            outcome.textContent ='Game over, you lost!';
             //how can i clear the image when there is a new guess
 }
 }
@@ -113,13 +109,14 @@ const equals = (a, b) =>
 const processGuess = (evt) => {
     evt.preventDefault();
     outcome.textContent='';
-    let aWord= newWord.join('');
     let guess = guessLetter.value.toLowerCase();
     let indeces = [];
     if((equals(newWord,incompleteWord))){
         outcome.textContent="Congrats you won!";
     }
-    
+    else if(wrongScore>=6){
+        outcome.textContent="Game over, you lost!";
+    }
     else if(newWord.includes(guess)){
         for(let i=0; i<newWord.length; i++){
         if(newWord[i]==guess){
@@ -139,8 +136,6 @@ const processGuess = (evt) => {
     }
     if((equals(newWord,incompleteWord))){
         outcome.textContent="Congrats you won!";
-    } else if (wrongGuess==6){
-        outcome.textContent=`Game over, you lost! The correct answer was: ${aWord}`
     }
     
     guessLetterForm.reset();
@@ -151,7 +146,5 @@ newGameBtn.addEventListener('click',newGame)
 guessLetterForm.addEventListener('submit', processGuess)
 userWordForm.addEventListener('submit',addToDatabase)
 deleteWordForm.addEventListener('submit',deleteFromDatabase)
-
-
 
 
