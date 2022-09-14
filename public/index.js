@@ -20,6 +20,7 @@ let incompleteWord = [];
 
 
 
+
 // When they click new game, get random word and display blanks. Returns word and underscores.
 const newGame = () => {
     wrongScore = 0;
@@ -29,7 +30,7 @@ const newGame = () => {
     axios.get("/api/word/")
         .then(res => {
             // newWord = res.data.toLowerCase().split('');
-            aWord=res.data.name;
+            let aWord=res.data.name;
             newWord = aWord.toLowerCase().split('');
             console.log(newWord);
             
@@ -70,8 +71,8 @@ const deleteFromDatabase = (evt) => {
 
 
 //how to get this to update
-const hangmanPic = (aWord) => {
-    aWord;
+const hangmanPic = () => {
+    
     if (wrongScore == 0){
         //gallows
         hangmanImg.src='/images/hangman.png'; 
@@ -100,7 +101,7 @@ const hangmanPic = (aWord) => {
     else {
             //make superman
             hangmanImg.src='/images/hangman_superhero.png';
-            outcome.textContent =`Game over, you lost! The correct word was: ${aWord}`;
+            // outcome.textContent ='Game over, you lost!';
             //how can i clear the image when there is a new guess
 }
 }
@@ -112,6 +113,7 @@ const equals = (a, b) =>
 const processGuess = (evt) => {
     evt.preventDefault();
     outcome.textContent='';
+    let aWord= newWord.join('');
     let guess = guessLetter.value.toLowerCase();
     let indeces = [];
     if((equals(newWord,incompleteWord))){
@@ -137,6 +139,8 @@ const processGuess = (evt) => {
     }
     if((equals(newWord,incompleteWord))){
         outcome.textContent="Congrats you won!";
+    } else if (wrongGuess==6){
+        outcome.textContent=`Game over, you lost! The correct answer was: ${aWord}`
     }
     
     guessLetterForm.reset();
