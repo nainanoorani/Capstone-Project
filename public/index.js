@@ -115,7 +115,7 @@ const processGuess = (evt) => {
         outcome.textContent="Congrats you won!";
     }
     else if(wrongScore>=6){
-        outcome.textContent="Game over, you lost!";
+        outcome.textContent='Game over, you lost! The word was ${newWord}';
     }
     else if(newWord.includes(guess)){
         for(let i=0; i<newWord.length; i++){
