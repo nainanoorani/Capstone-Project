@@ -16,7 +16,7 @@ let correctGuesses = [];
 let wrongScore = 0;
 let newWord= []; 
 let incompleteWord = [];
-let aWord='';
+
 
 
 
@@ -41,6 +41,7 @@ const newGame = () => {
             console.log(incompleteWord);
             
             resultsText.textContent=underscores;
+            return aWord;
     })
     
 }
@@ -69,7 +70,8 @@ const deleteFromDatabase = (evt) => {
 
 
 //how to get this to update
-const hangmanPic = () => {
+const hangmanPic = (aWord) => {
+    aWord;
     if (wrongScore == 0){
         //gallows
         hangmanImg.src='/images/hangman.png'; 
@@ -98,7 +100,7 @@ const hangmanPic = () => {
     else {
             //make superman
             hangmanImg.src='/images/hangman_superhero.png';
-            outcome.textContent ='Game over, you lost! New word was ${aWord}';
+            outcome.textContent =`Game over, you lost! The correct word was: ${aWord}`;
             //how can i clear the image when there is a new guess
 }
 }
