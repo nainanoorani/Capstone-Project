@@ -16,6 +16,7 @@ let correctGuesses = [];
 let wrongScore = 0;
 let newWord= []; 
 let incompleteWord = [];
+let aWord='';
 
 
 
@@ -97,7 +98,7 @@ const hangmanPic = () => {
     else {
             //make superman
             hangmanImg.src='/images/hangman_superhero.png';
-            outcome.textContent ='Game over, you lost!';
+            outcome.textContent ='Game over, you lost! New word was ${aWord}';
             //how can i clear the image when there is a new guess
 }
 }
@@ -114,9 +115,7 @@ const processGuess = (evt) => {
     if((equals(newWord,incompleteWord))){
         outcome.textContent="Congrats you won!";
     }
-    else if(wrongScore>=6){
-        outcome.textContent='Game over, you lost! The word was ${newWord}';
-    }
+    
     else if(newWord.includes(guess)){
         for(let i=0; i<newWord.length; i++){
         if(newWord[i]==guess){
