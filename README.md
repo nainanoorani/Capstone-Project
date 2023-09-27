@@ -1,16 +1,33 @@
-# Skills 6
+# Super Hang Man 
+Is a superhero inspired game of hangman. It retrieves a list of superhero words from a PostgreSQL data and selects a random word to begin the game. Users guess letters, one at a time, until they guess the correct word or guess incorrectly 6 times, creating a hangman.
+Users can also add their own words to the database and delete words.
 
-<sup>:apple: Hackbright Academy Software Engineering Program</sup>
+# Technologies Used:
+Javascript
+HTML
+CSS
+PostgreSQL
+NodeJS
+Express
 
-## :memo: Assessment Instructions
+# How to run locally
+Clone files: git clone https://github.com/nainanoorani/Capstone-Project.git 
+Set up dependencies: npm init -y, npm express cors dotenv pg-hstore sequelize
+Start server: nodemon server.js
+Go to localhost:3000 to see the web app
 
-Click on the link below to view instructions for this skills assessment. If you need help getting started, see [Getting Started](#getting-started)
+# Link
+https://youtu.be/U-HmJD5wwe8
+https://superhangman-naina.herokuapp.com/index.html 
 
-### [:link: Click here to view instructions for this skills assessment](https://fellowship.hackbrightacademy.com/materials/foundations/homework/fs-skills-6/)
+# How to use Super Hang Man
+Click New game
+Guess letters in first input field and click enter. 
+Guess the full word correctly in 6 attempts to win the game.
+Add your own superhero words to database using second input field.
+Delete accidental entries from database using third input field.
+To play again, click new game.
 
-## :exclamation: Getting Started
-
-Need help getting started? The instructions below will walk you through how to clone an 
-assessment repository from GitHub and submit your work.
-
+# Author
+Naina Noorani is a software engineer in Houston, TX.
 ### [:link: How to do Skills Assessments from Github Classroom](https://fellowship.hackbrightacademy.com/materials/foundations/resources/how-to-skills-github/)
